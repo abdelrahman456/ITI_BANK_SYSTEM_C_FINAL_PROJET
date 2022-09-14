@@ -8,39 +8,11 @@
 /* User-Defined Libs */
 #include "STD_Types.h"
 #include "Bank_sys.h"
-user head; 
-u32 ListLength = 0;
+user head;  //Head of the Linked List
 
-/*u8 searchpatient(u32  id)
-{
-	if (ListLength == 0)
-	{
-		printf("no PATIENT ADD\n");
-		return 0;
-	}else
-	{
-		user *searched =&head;
-		while((searched ->ID !=id) && (searched -> Next !=NULL))
-		{
-			searched = (searched -> Next);
-			
-		}
-		if(searched -> Next == NULL)
-		{
-			printf("WRONG ID PLEASE TRY AGAIN \n");
-		    return 0;
-			
-		}else  return 1;
-		
-	}
-	
-	
-	
-	
-	
-	
-}
-*/
+u32 ListLength = 0;  // Number of Account Created
+
+
 void Create_New_Account( )
 {
 	u8 i=0;
@@ -99,7 +71,7 @@ void Create_New_Account( )
 	scanf("%d", &balance) ;
 	
 	printf("\n----------------------------------------------\n");
-	if (ListLength == 0){
+	if (ListLength == 0){ 
 		
 		stpcpy((head.National_ID), N_ID);
 		/*for(i=0;i<14;i++){
@@ -218,89 +190,96 @@ void Open_Existing_Account()
 	fp = fopen("username.txt",
 			"rb");
 
-	if (fp == NULL) {
+	if (fp == NULL) 
+	{
 		printf("ERROR IN OPENING FILE");
 	}
-	system("cls");
-	printf("------------------------------------------------\n");
-	printf("\n\n ACCOUNT_ID 10 CHARACTERS MAX!!");
-	printf("\n\n PASSWORD 50 CHARACTERS MAX!!");
-	printf("\n------------------------------------------------\n");
-	printf("*************************************************\n");
-	printf("*************************************************\n");
-	printf("*Please Enter Account_ID::"); fflush(stdout);
-	scanf("%s",&Acc_ID);
-	printf("*Please Enter PASSWORD::"); fflush(stdout);
-	// Taking password in the form of
-	// stars
-	for (i = 0; i < 50; i++) {
-		ch = getch();
-		if (ch != 13) {
-			password[i] = ch;
-			ch = '#';
-			printf("%c", ch);
-		}
-		else
-			break;
-	}
-	
-	/*if (ListLength > 0) 
-	{*/
-	    user *searched =&head;
-	while(fread(&head, sizeof(head),
-				1, fp))
-	{
-		
-		while((strcmp(searched ->Account_ID , Acc_ID)==1)&&(searched -> Next != NULL))
+		system("cls");
+		printf("------------------------------------------------\n");
+		printf("\n\n ACCOUNT_ID 10 CHARACTERS MAX!!");
+		printf("\n\n PASSWORD 50 CHARACTERS MAX!!");
+		printf("\n------------------------------------------------\n");
+		printf("*************************************************\n");
+		printf("*************************************************\n");
+		printf("*Please Enter Account_ID::"); fflush(stdout);
+		scanf("%s",&Acc_ID);
+		printf("*Please Enter PASSWORD::"); fflush(stdout);
+														// Taking password in the form of
+																// stars
+		for (i = 0; i < 50; i++) 
 		{
-			searched = (searched -> Next);
-			
+			ch = getch();
+			if (ch != 13) 
+			{
+				password[i] = ch;
+				ch = '#';
+				printf("%c", ch);
+			}
+			else
+			break;
 		}
+	
+				/*if (ListLength > 0) 
+					{*/
+	      user *searched =&head;
+		while(fread(&head, sizeof(head),
+				1, fp))
+		{
+		
+			while((strcmp(searched ->Account_ID , Acc_ID)==1)&&(searched -> Next != NULL))
+			{
+					searched = (searched -> Next);
+			
+			
+			}
 		
 		if(strcmp(searched ->Account_ID , Acc_ID)==0)
-		{
-			printf("\n*************************************************\n");
-			printf("*  1- CLIENT ID : %s                            *\n", Acc_ID ); fflush(stdout);
-			printf("*  2-ACCOUNT BALANCE: %d                        *\n", searched -> Balance);fflush(stdout);
-			printf("*  3-CLIENT NAME is: %s                         *\n\n", searched ->Name); fflush(stdout);
-			printf("*************************************************\n\n");
-			printf("*  1- TO MAKE TRANSACTION                       *\n"); fflush(stdout);
-			printf("*  2- TO CHANGE Account STATUS                  *\n"); fflush(stdout);
-			printf("*  3- TO GET CASH                               *\n"); fflush(stdout);
-			printf("*  4- TO DEPOSIT IN ACCOUNT                     *\n"); fflush(stdout);
-		    printf("*  0- TO RETURN TO MAIN MENU                    *\n"); fflush(stdout);
-			printf("*************************************************\n\n");
-			printf("*************************************************\n::"); fflush(stdout);
-		    scanf("%d", &choice_2);
-			printf("\n*************************************************\n"); 
-			switch(choice_2) {
-					 case 0:
+		    {
+				printf("\n*************************************************\n");
+				printf("*  1- CLIENT ID : %s                            *\n", Acc_ID ); fflush(stdout);
+				printf("*  2-ACCOUNT BALANCE: %d                        *\n", searched -> Balance);fflush(stdout);
+				printf("*  3-CLIENT NAME is: %s                         *\n\n", searched ->Name); fflush(stdout);
+				printf("*************************************************\n\n");
+				printf("*  1- TO MAKE TRANSACTION                       *\n"); fflush(stdout);
+				printf("*  2- TO CHANGE Account STATUS                  *\n"); fflush(stdout);
+				printf("*  3- TO GET CASH                               *\n"); fflush(stdout);
+				printf("*  4- TO DEPOSIT IN ACCOUNT                     *\n"); fflush(stdout);
+				printf("*  0- TO RETURN TO MAIN MENU                    *\n"); fflush(stdout);
+				printf("*************************************************\n\n");
+				printf("*************************************************\n::"); fflush(stdout);
+				scanf("%d", &choice_2);
+				printf("\n*************************************************\n"); 
+				switch(choice_2) 
+				{
+					case 0:
 					   system("cls");
                        printf("*************************************************\n");
 				       printf("*       RETURN TO MAIN MENU                     *\n");
 				       printf("*       Thank You  Good Bye                     *\n"); 
 				       printf("*************************************************\n");
-				       break;
-                     case 1:	
-					 if((strcmp((searched -> typeaccount), closed_ )==0)||(strcmp((searched -> typeaccount), restricted )==0)){
-						 system("cls");
-					   printf("*************************************************\n");
-					   printf("*  1- YOU can't  MAKE A TRANSACTION              *\n"); fflush(stdout);
-						 break;
+				    break;
+                    case 1:	
+						if((strcmp((searched -> typeaccount), closed_ )==0)||(strcmp((searched -> typeaccount), restricted )==0))
+						{
+							system("cls");
+							printf("*************************************************\n");
+							printf("*  1- YOU can't  MAKE A TRANSACTION              *\n"); fflush(stdout);
+							break;
 						 
-					 }else{
-                       printf("*************************************************\n");
-					   printf("*  1- YOU WILL MAKE TRANSACTION              *\n"); fflush(stdout);
+						}else
+						{
+							printf("*************************************************\n");
+							printf("*  1- YOU WILL MAKE TRANSACTION              *\n"); fflush(stdout);
 				       
-					   printf("* please Enter AMOUNT oF  MONEY  ::"); fflush(stdout);
-				       scanf("%d", &amount_of_money) ;
-					   printf("*Please Enter 2ND Account_ID::"); fflush(stdout);
-				       n=1;
-					   scanf("%s",&Sec_Acc_ID);
+							printf("* please Enter AMOUNT oF  MONEY  ::"); fflush(stdout);
+							scanf("%d", &amount_of_money) ;
+							printf("*Please Enter 2ND Account_ID::"); fflush(stdout);
+							n=1;
+							scanf("%s",&Sec_Acc_ID);
 					   
-						  Make_Transaction(Acc_ID, Sec_Acc_ID, amount_of_money);
-					 break;
-					 }	
+							Make_Transaction(Acc_ID, Sec_Acc_ID, amount_of_money);
+							break;
+						}	
 					case 2:	
                        printf("*************************************************\n");
 					   printf("*  2- YOU WILL CHANGE Account STATUS         *\n"); fflush(stdout);
@@ -313,53 +292,47 @@ void Open_Existing_Account()
 			            scanf("%s",&typeaccount);
 						
 						stpcpy(searched-> typeaccount, typeaccount);
-                        break;	
+                    break;	
 					case 3:	
-					if((strcmp((searched -> typeaccount), "closed" )==0)||(strcmp((searched -> typeaccount), "restricted" )==0))
-					{
-					   system("cls");
-					   printf("*************************************************\n");
-					   printf("*  1- YOU can't  GET A CASH                  *\n"); fflush(stdout);
+						if((strcmp((searched -> typeaccount), "closed" )==0)||(strcmp((searched -> typeaccount), "restricted" )==0))
+						{
+							system("cls");
+							printf("*************************************************\n");
+							printf("*  1- YOU can't  GET A CASH                  *\n"); fflush(stdout);
 						 break;
 						 
-					 }else{
-                       printf("*************************************************\n");
-					   printf("*  3- YOU WANT TO GET A CASH                    *\n"); fflush(stdout);
-				       //printf("*Please Enter  Account_ID::"); fflush(stdout);
-				       n=1;
-				       /*do
-                       {
-                        scanf("%c",&Acc_ID[n]);
-                         n++;
-                        }while(Acc_ID[n] != ' ' && n<14);
-			              n=1;*/	
-					   printf("* please Enter AMOUNT oF  MONEY  ::"); fflush(stdout);
-				       scanf("%d", &amount_of_money) ;
-					   Get_Cash(Acc_ID, amount_of_money);
-					 break;	}
-						case 4:	
-						if((strcmp((searched -> typeaccount), closed_ )==0)||(strcmp((searched -> typeaccount), restricted )==0)){
-						 system("cls");
-					   printf("*************************************************\n");
-					   printf("*  1- YOU can't  DEPOSIT IN ACCOUNT           *\n"); fflush(stdout);
-						 break;
+						}
+						else
+						{
+							printf("*************************************************\n");
+							printf("*  3- YOU WANT TO GET A CASH                    *\n"); fflush(stdout);
+							//printf("*Please Enter  Account_ID::"); fflush(stdout);
+							
+							printf("* please Enter AMOUNT oF  MONEY  ::"); fflush(stdout);
+							scanf("%d", &amount_of_money) ;
+							Get_Cash(Acc_ID, amount_of_money);
+							break;	
+						}
+					case 4:	
+						if((strcmp((searched -> typeaccount), closed_ )==0)||(strcmp((searched -> typeaccount), restricted )==0))
+						{
+							system("cls");
+							printf("*************************************************\n");
+							printf("*  1- YOU can't  DEPOSIT IN ACCOUNT           *\n"); fflush(stdout);
+							break;
 						 
-					 }else{
-                       printf("*************************************************\n");
-					   printf("*  4- YOU WANT TO DEPOSIT IN ACCOUNT                   *\n"); fflush(stdout);
-				       //printf("*Please Enter  Account_ID::"); fflush(stdout);
-				       n=1;
-				       /*do
-                       {
-                        scanf("%c",&Acc_ID[n]);
-                         n++;
-                        }while(Acc_ID[n] != ' ' && n<14);
-			              n=1;	*/
-					   printf("* please Enter AMOUNT oF  MONEY  ::"); fflush(stdout);
-				       scanf("%d", &amount_of_money) ;
-					   Deposit_InAccount( Acc_ID,  amount_of_money);
-					 break;
-					 }
+						}
+						else
+						{
+							printf("*************************************************\n");
+							printf("*  4- YOU WANT TO DEPOSIT IN ACCOUNT                   *\n"); fflush(stdout);
+				       
+				       
+							printf("* please Enter AMOUNT oF  MONEY  ::"); fflush(stdout);
+							scanf("%d", &amount_of_money) ;
+							Deposit_InAccount( Acc_ID,  amount_of_money);
+							break;
+						}
                     default :
 					   system("cls");
 					   printf("*************************************************\n");
@@ -367,12 +340,12 @@ void Open_Existing_Account()
 				       printf("* Thank You\nGood Bye                           *\n"); 
 				       printf("*************************************************\n");
                         ExitFlag = 1;
-		               break;						
+		            break;						
 					  
 					  
 					  
-				  }   
-		}//else if(strcmp(searched ->Account_ID , Acc_ID)) printf("*-----------------WRONG ID PLEASE TRY AGAIN----------------- \n");
+				}   
+		    }//else if(strcmp(searched ->Account_ID , Acc_ID)) printf("*-----------------WRONG ID PLEASE TRY AGAIN----------------- \n");
 		
 	}/*else
 	 {
@@ -388,10 +361,11 @@ void Get_Cash(u8 Acc_ID[], u32 Money)
 	FILE *fp, *fu;
 	fp = fopen("username.txt",
 			"rb");
-			fu = fopen("username.txt",
+	fu = fopen("username.txt",
 			"ab");
 
-	if (fp == NULL) {
+	if (fp == NULL) 
+	{
 		printf("ERROR IN OPENING FILE");
 	}
 	/*if (ListLength > 0) */
@@ -402,12 +376,12 @@ void Get_Cash(u8 Acc_ID[], u32 Money)
 			searched =&head;
 	
 	    
-		while((strcmp(searched ->Account_ID , Acc_ID)==1)&&(searched -> Next != NULL))
+	 while((strcmp(searched ->Account_ID , Acc_ID)==1)&&(searched -> Next != NULL))
 		{
 			searched = (searched -> Next);
 			
 		}
-		if(strcmp(searched ->Account_ID , Acc_ID)==0)
+	 if(strcmp(searched ->Account_ID , Acc_ID)==0)
 		{
 			printf("*************************************************\n");
 			printf("*  1- CLIENT ID : %s                            *\n", searched ->Account_ID ); fflush(stdout);
@@ -422,9 +396,10 @@ void Get_Cash(u8 Acc_ID[], u32 Money)
 		           1, fu);
 			    printf("\n*  ACCOUNT BALANCE AFTER GET CASH : %d          *\n", searched -> Balance);fflush(stdout);
 		    }
-	         else {
-				 printf("\n*-----------------WRONG AMOUNT OF MONEY PLEASE TRY AGAIN----------------- \n");
-				 }
+	        else 
+			{
+				printf("\n*-----------------WRONG AMOUNT OF MONEY PLEASE TRY AGAIN----------------- \n");
+			}
 			
 		}//else printf("\n-----------------WRONG ID PLEASE TRY AGAIN----------------- \n");
 		
@@ -472,9 +447,10 @@ void Deposit_InAccount(u8 Acc_ID[], u32 Money)
 				searched -> Balance=(searched -> Balance)+Money;
 			    printf("\n*  ACCOUNT BALANCE AFTER DEPOSIT CASH : %d  *\n", searched -> Balance);fflush(stdout);
 		    }
-	         else {
+	        else 
+			{
 				 printf("\n*-----------------WRONG AMOUNT OF MONEY PLEASE TRY AGAIN----------------- \n");
-				 }
+			}
 			
 		}//else {printf("* -----------------WRONG ID PLEASE TRY AGAIN----------------- \n");}
 		
@@ -537,11 +513,16 @@ void Make_Transaction(u8 Acc_ID[],u8 SEC_ID[],u32 Money)
 			
 		}//else printf("* -----------------WRONG ID PLEASE TRY AGAIN----------------- \n");
 	
-	   if((searched -> Balance)>=Money){ 
-	   searched -> Balance=(searched -> Balance)-Money;
-	   searched_2 -> Balance=(searched_2 -> Balance)+Money;}
-	   else {printf("\n*-----------------WRONG AMOUNT OF MONEY PLEASE TRY AGAIN----------------- \n");}
-	   printf("*  First ACCOUNT BALANCE: %d                    *\n", searched -> Balance);fflush(stdout);
+	   if((searched -> Balance)>=Money)
+	    { 
+	     searched -> Balance=(searched -> Balance)-Money;
+	     searched_2 -> Balance=(searched_2 -> Balance)+Money;
+	    }
+	    else 
+		{
+			printf("\n*-----------------WRONG AMOUNT OF MONEY PLEASE TRY AGAIN----------------- \n");
+		}
+		printf("*  First ACCOUNT BALANCE: %d                    *\n", searched -> Balance);fflush(stdout);
 	}
 	fclose(fp);
 	printf("---------------------------------------------------------------------------\n\n\n");
@@ -590,14 +571,15 @@ void User_mode(){
 			printf("*************************************************\n::"); fflush(stdout);
 		    scanf("%d", &choice_2);
 			printf("\n*************************************************\n"); 
-			switch(choice_2) {
-					 case 0:
+			switch(choice_2) 
+			{
+				case 0:
                        printf("*************************************************\n");
 				       printf("*       RETURN TO MAIN MENU                     *\n");
 				       printf("*       Thank You  Good Bye                     *\n"); 
 				       printf("*************************************************\n");
-				       break;
-                     case 1:	
+				break;
+                case 1:	
                        printf("*************************************************\n");
 					   printf("*  1- YOU WANT TO MAKE TRANSACTION              *\n"); fflush(stdout);
 				       
@@ -608,42 +590,42 @@ void User_mode(){
 					   scanf("%s",&Sec_Acc_ID);
 					   
 						  Make_Transaction(Acc_ID, Sec_Acc_ID, amount_of_money);
-                        break;	
-					case 2:	
+                break;	
+				case 2:	
                        printf("*************************************************\n");
 					   printf("*  2- YOU WANT TO CHANGE Account PASSWORD         *\n"); fflush(stdout);
 				       printf("*Please Enter  Account_ID::"); fflush(stdout);
 				       n=1;
 					   scanf("%s",&Acc_ID);
 				       
-                        break;	
-					case 3:	
+                break;	
+				case 3:	
                        printf("*************************************************\n");
 					   printf("*  3- YOU WANT TO GET A CASH                    *\n"); fflush(stdout);
 				       
 					   printf("* please Enter AMOUNT oF  MONEY  ::"); fflush(stdout);
 				       scanf("%d", &amount_of_money) ;
 					   Get_Cash(Acc_ID, amount_of_money);
-                        break;	
-					case 4:	
+                break;	
+				case 4:	
                        printf("*************************************************\n");
 					   printf("*  4- YOU WANT TO DEPOSIT IN ACCOUNT                   *\n"); fflush(stdout);
 				    
 					   printf("* please Enter AMOUNT oF  MONEY  ::"); fflush(stdout);
 				       scanf("%d", &amount_of_money) ;
 					   Deposit_InAccount( Acc_ID,  amount_of_money);
-                        break;
-                    default :
+                break;
+                default :
 					   printf("*************************************************\n");
 				       printf("* Invalid Choice please try again               *\n");
 				       printf("* Thank You\nGood Bye                           *\n"); 
 				       printf("*************************************************\n");
                         ExitFlag = 1;
-		               break;						
+		        break;						
 					  
 					  
 					  
-				  }   
+			}   
 		}//else printf("* -----------------WRONG ID PLEASE TRY AGAIN----------------- \n");
 		
 	}else
